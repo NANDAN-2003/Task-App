@@ -1,7 +1,7 @@
 from flask import Flask,request,jsonify
 from pymongo import MongoClient
 from flask_cors import CORS
-from date import datetime
+from datetime import datetime
 
 app=Flask(__name__)
 CORS(app)

@@ -1,6 +1,7 @@
 from flask import Flask,request,jsonify
 from pymongo import MongoClient
 from flask_cors import CORS
+from date import datetime
 
 app=Flask(__name__)
 CORS(app)
@@ -17,6 +18,7 @@ def get_task():
 @app.route("/task",methods=["POST"])
 def add_task():
     data=request.json
+    data["timestamp"]=datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     collection.insert_one(data)
     return jsonify({"msg":"task added"})
 
@@ -26,7 +28,7 @@ def delete_task(title):
     return jsonify({"msg":"task deleted"})
 
 if __name__=="__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
 
 
 
